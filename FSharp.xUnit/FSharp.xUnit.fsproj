@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>xp44m</Authors>
+    <Company>34696643@qq.com</Company>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <Description>仅一个函数`Should.equal`的库，利用F#语言的类型推导，断言时不用给出类型参数。</Description>
+    <Copyright>xp44mm</Copyright>
+    <RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Should.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.assert" Version="2.4.1" />
+  </ItemGroup>
+
+</Project>
