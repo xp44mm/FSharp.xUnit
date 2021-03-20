@@ -5,18 +5,40 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>xp44m</Authors>
     <Company>34696643@qq.com</Company>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <Description>仅一个函数`Should.equal`的库，利用F#语言的类型推导，断言时不用给出类型参数。</Description>
+    <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+    <Description>The class library extends `xunit` to assert equal. It output data in F# style. It's easier to customize the IEqualityComparer.</Description>
     <Copyright>xp44mm</Copyright>
     <RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>It output data in F# style. 
+It's easier to customize the IEqualityComparer.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="EqualityComparerAdapters/EqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/NullableEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/ArrayEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/TupleEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/RecordEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/ListEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/SetEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/MapEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/UnionEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparerAdapters/SeqEqualityComparerAdapter.fs" />
+    <Compile Include="EqualityComparer.fs" />
+    <Compile Include="Register.fs" />
     <Compile Include="Should.fs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FSharp.Idioms" Version="1.1.8" />
+    <PackageReference Include="FSharp.Literals" Version="2.1.4" />
     <PackageReference Include="xunit.assert" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="5.0.1" />
   </ItemGroup>
 
 </Project>
