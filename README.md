@@ -59,8 +59,13 @@ type JTokenEqualityComparerAdapter() =
                         genericComp.GetHashCode(unbox<JToken> p)
             }
 
-let should = Register.``override``[ JTokenEqualityComparerAdapter.Singleton; JPropertyEqualityComparerAdapter.Singleton ]
+let should = Register.``override``[ 
+    JPropertyEqualityComparerAdapter.Singleton 
+    JTokenEqualityComparerAdapter.Singleton
+    ]
 ```
+
+注意派生类要放到基类的上面，否则派生类数据就会进到基类适配器，派生类适配器被旁路掉了。
 
 获得了`should`，我们就可以进行自定义的测试了，测试的方法和上面的差不多：
 

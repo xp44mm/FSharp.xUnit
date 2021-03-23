@@ -8,10 +8,10 @@ type ArrayEqualityComparerAdapter() =
     static member Singleton = ArrayEqualityComparerAdapter() :> EqualityComparerAdapter
 
     interface EqualityComparerAdapter with
-        member this.filter ty = ty.IsGenericType && ty.IsArray && ty.GetArrayRank() = 1
+        member this.filter ty = ty.IsArray && ty.GetArrayRank() = 1
         member this.getEqualityComparer(loop,ty) =
             let reader = ArrayType.readArray ty
-            let elementType = ty.GenericTypeArguments.[0]
+            let elementType = ty.GetElementType()
             let loopElement = loop elementType
             {
                 new IEqualityComparer with
