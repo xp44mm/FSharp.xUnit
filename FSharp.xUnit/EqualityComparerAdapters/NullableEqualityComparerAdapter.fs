@@ -14,7 +14,6 @@ type NullableEqualityComparerAdapter() =
 
         member this.getEqualityComparer(loop,ty) =
             let elementType = ty.GenericTypeArguments.[0]
-            Console.WriteLine(Render.stringify elementType)
             let loopElement = loop elementType
 
             {

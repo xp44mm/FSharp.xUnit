@@ -33,7 +33,7 @@ It's easier to customize the IEqualityComparer.</PackageReleaseNotes>
 
   <ItemGroup>
     <PackageReference Include="FSharp.Idioms" Version="1.1.8" />
-    <PackageReference Include="FSharp.Literals" Version="2.1.4" />
+    <PackageReference Include="FSharp.Literals" Version="2.2.1" />
     <PackageReference Include="xunit.assert" Version="2.4.1" />
   </ItemGroup>
 

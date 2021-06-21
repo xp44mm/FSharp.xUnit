@@ -12,7 +12,7 @@ Install-Package FSharp.xUnit
 
 ## GetStarted 
 
-Ê¹ÓÃÏµÍ³Ä¬ÈÏµÄÏàµÈ±È½ÏÆ÷£º
+ä½¿ç”¨ç³»ç»Ÿé»˜è®¤çš„ç›¸ç­‰æ¯”è¾ƒå™¨ï¼š
 
 ```F#
 open FSharp.xUnit
@@ -22,9 +22,9 @@ let ``My test`` () =
     Should.equal 1 1
 ```
 
-Ïà·´µÄ²Ù×÷`Should.notEqual`
+ç›¸åçš„æ“ä½œ`Should.notEqual`
 
-Ê¹ÓÃ×Ô¶¨ÒåµÄÏàµÈ±È½ÏÆ÷£¬ÏÈÅäÖÃ±È½ÏÆ÷£¬newtonsoft.netÊÇ.netÁ÷ĞĞµÄjson¿â£¬µ«ÊÇjpropertyÈ±ÉÙ½á¹¹»¯±È½ÏµÄ·½·¨£¬Õâ¸ö´úÂëÊ¾ÀıÑİÊ¾ÈçºÎ¶¨ÒåÊÊÅäÆ÷£º
+ä½¿ç”¨è‡ªå®šä¹‰çš„ç›¸ç­‰æ¯”è¾ƒå™¨ï¼Œå…ˆé…ç½®æ¯”è¾ƒå™¨ï¼Œnewtonsoft.netæ˜¯.netæµè¡Œçš„jsonåº“ï¼Œä½†æ˜¯`JProperty`ç¼ºå°‘ç»“æ„åŒ–æ¯”è¾ƒçš„æ–¹æ³•ï¼Œè¿™ä¸ªä»£ç ç¤ºä¾‹æ¼”ç¤ºå¦‚ä½•å®šä¹‰é€‚é…å™¨ï¼š
 
 ```F#
 type JPropertyEqualityComparerAdapter() =
@@ -44,7 +44,6 @@ type JPropertyEqualityComparerAdapter() =
                         let p = unbox<JProperty> p
                         hash [|stringComparer.GetHashCode p.Name; jTokenEqualityComparer.GetHashCode p.Value|]
             }
-    
 
 type JTokenEqualityComparerAdapter() =
     static member Singleton = JTokenEqualityComparerAdapter() :> EqualityComparerAdapter
@@ -59,25 +58,23 @@ type JTokenEqualityComparerAdapter() =
                         genericComp.GetHashCode(unbox<JToken> p)
             }
 
-let should = Register.``override``[ 
-    JPropertyEqualityComparerAdapter.Singleton 
+let should = Register.``override``[
+    JPropertyEqualityComparerAdapter.Singleton
     JTokenEqualityComparerAdapter.Singleton
     ]
 ```
 
-×¢ÒâÅÉÉúÀàÒª·Åµ½»ùÀàµÄÉÏÃæ£¬·ñÔòÅÉÉúÀàÊı¾İ¾Í»á½øµ½»ùÀàÊÊÅäÆ÷£¬ÅÉÉúÀàÊÊÅäÆ÷±»ÅÔÂ·µôÁË¡£
+æ³¨æ„æ´¾ç”Ÿç±»è¦æ”¾åˆ°åŸºç±»çš„ä¸Šé¢ï¼Œå¦åˆ™æ´¾ç”Ÿç±»æ•°æ®å°±ä¼šè¿›åˆ°åŸºç±»é€‚é…å™¨ï¼Œæ´¾ç”Ÿç±»é€‚é…å™¨è¢«æ—è·¯æ‰äº†ã€‚
 
-»ñµÃÁË`should`£¬ÎÒÃÇ¾Í¿ÉÒÔ½øĞĞ×Ô¶¨ÒåµÄ²âÊÔÁË£¬²âÊÔµÄ·½·¨ºÍÉÏÃæµÄ²î²»¶à£º
+è·å¾—äº†`should`ï¼Œæˆ‘ä»¬å°±å¯ä»¥è¿›è¡Œè‡ªå®šä¹‰çš„æµ‹è¯•äº†ï¼Œæµ‹è¯•çš„æ–¹æ³•å’Œä¸Šé¢çš„å·®ä¸å¤šï¼š
 
 ```F#
 [<Fact>]
 member this.``translateFields``() =
     let y = [JProperty("b",JValue(null:obj));JProperty("a",JValue(0.0))]
     let z = [JProperty("b",JValue(null:obj));JProperty("a",JValue(0.0))]
-        
     should.equal y z
-
 ```
 
-Ïà·´µÄ²Ù×÷`should.notEqual`
+ç›¸åçš„æ“ä½œ`should.notEqual`
 
