@@ -1,4 +1,4 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.UnionEqualityComparer
 
 open System.Collections
 open FSharp.xUnit
@@ -6,15 +6,11 @@ open System
 open FSharp.Idioms
 open Microsoft.FSharp.Reflection
 
-type UnionEqualityComparerAdapter() =
-    static member Singleton = UnionEqualityComparerAdapter() :> EqualityComparerAdapter
-
-    interface EqualityComparerAdapter with
-        member this.filter ty = FSharpType.IsUnion ty
-        member this.getEqualityComparer(loop,ty) =
+let tryGet(ty: Type) =
+    if FSharpType.IsUnion ty then
+        Some(fun (loop:Type -> IEqualityComparer) ->
             let unionCases = FSharpType.GetUnionCases ty
             let tagReader = FSharpValue.PreComputeUnionTagReader ty
-
             let unionCases =
                 unionCases
                 |> Array.map(fun uc ->
@@ -26,7 +22,6 @@ type UnionEqualityComparerAdapter() =
                         fieldTypes = fieldTypes
                         reader = FSharpValue.PreComputeUnionReader uc
                     |})
-
             {
                 new IEqualityComparer with
                     member this.Equals(ls1,ls2) = 
@@ -39,7 +34,6 @@ type UnionEqualityComparerAdapter() =
                             Array.zip3 uc.fieldTypes objs1 objs2
                             |> Array.forall(fun(fty,obj1,obj2)-> (loop fty).Equals(obj1,obj2))
                         else false
-
                     member this.GetHashCode(x) = 
                         let tag = tagReader x
                         let uc = unionCases.[tag]
@@ -50,5 +44,5 @@ type UnionEqualityComparerAdapter() =
                         Array.zip types values
                         |> Array.map(fun(t,v) -> (loop t).GetHashCode(v))
                         |> hash
-            }
-
+            })
+    else None

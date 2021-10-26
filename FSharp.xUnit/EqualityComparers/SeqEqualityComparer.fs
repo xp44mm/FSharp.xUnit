@@ -1,4 +1,4 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.SeqEqualityComparer
 
 open System
 open System.Collections
@@ -7,24 +7,16 @@ open System.Collections.Generic
 open FSharp.xUnit
 open FSharp.Idioms
 
-type SeqEqualityComparerAdapter() =
-    static member Singleton = SeqEqualityComparerAdapter() :> EqualityComparerAdapter
-
-    interface EqualityComparerAdapter with
-        member this.filter ty = 
-            ty.IsGenericType && ty.GenericTypeArguments.Length = 1 &&
-            typedefof<seq<_>>.MakeGenericType(ty.GenericTypeArguments).IsAssignableFrom ty
-
-        member this.getEqualityComparer(loop,ty) =
+let tryGet(ty: Type) =
+    if ty.IsGenericType && ty.GenericTypeArguments.Length = 1 && 
+        typedefof<seq<_>>.MakeGenericType(ty.GenericTypeArguments).IsAssignableFrom ty then
+        Some(fun (loop:Type -> IEqualityComparer) ->
             let loopElement = loop ty.GenericTypeArguments.[0]
-
             let seq = typedefof<seq<_>>.MakeGenericType(ty.GenericTypeArguments)
             let enumerator = typedefof<IEnumerator<_>>.MakeGenericType(ty.GenericTypeArguments)
             let mMoveNext = typeof<IEnumerator>.GetMethod("MoveNext")
-
             let mGetEnumerator = seq.GetMethod("GetEnumerator")
             let pCurrent = enumerator.GetProperty("Current")
-
             {
                 new IEqualityComparer with
                     member this.Equals(ls1,ls2) = 
@@ -50,5 +42,6 @@ type SeqEqualityComparerAdapter() =
                                 else true
                             loopNext 0
                     member this.GetHashCode(ls) = hash ls
-            }
+            })
+    else None
 

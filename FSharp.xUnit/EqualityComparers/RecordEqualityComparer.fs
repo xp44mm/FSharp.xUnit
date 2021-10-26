@@ -1,4 +1,5 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.RecordEqualityComparer
+
 
 open System.Collections
 open FSharp.xUnit
@@ -6,19 +7,14 @@ open System
 open FSharp.Idioms
 open Microsoft.FSharp.Reflection
 
-type RecordEqualityComparerAdapter() =
-    static member Singleton = RecordEqualityComparerAdapter() :> EqualityComparerAdapter
-
-    interface EqualityComparerAdapter with
-        member this.filter ty = FSharpType.IsRecord ty
-        member this.getEqualityComparer(loop,ty) =
+let tryGet (ty: Type) =
+    if FSharpType.IsRecord ty then
+        Some(fun (loop:Type -> IEqualityComparer) ->
             let piFields = FSharpType.GetRecordFields ty
             let reader = FSharpValue.PreComputeRecordReader ty
-
             let loopFields = 
                 piFields 
                 |> Array.map(fun pi -> loop pi.PropertyType)
-
             {
                 new IEqualityComparer with
                     member this.Equals(ls1,ls2) = 
@@ -32,5 +28,5 @@ type RecordEqualityComparerAdapter() =
                         |> Array.zip loopFields
                         |> Array.map(fun(loopField,a1) -> loopField.GetHashCode(a1))
                         |> hash
-            }
-
+            })
+    else None

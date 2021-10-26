@@ -1,15 +1,14 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.ArrayEqualityComparer
 
+open System
 open System.Collections
 open FSharp.xUnit
 open FSharp.Idioms
+open FSharp.Literals
 
-type ArrayEqualityComparerAdapter() =
-    static member Singleton = ArrayEqualityComparerAdapter() :> EqualityComparerAdapter
-
-    interface EqualityComparerAdapter with
-        member this.filter ty = ty.IsArray && ty.GetArrayRank() = 1
-        member this.getEqualityComparer(loop,ty) =
+let tryGet (ty: Type) =
+    if ty.IsArray && ty.GetArrayRank() = 1 then
+        Some(fun (loop:Type -> IEqualityComparer) ->
             let reader = ArrayType.readArray ty
             let elementType = ty.GetElementType()
             let loopElement = loop elementType
@@ -23,7 +22,7 @@ type ArrayEqualityComparerAdapter() =
                         else
                             let _, a1 = reader ls1
                             let _, a2 = reader ls2
-                            
+                        
                             if a1.Length = a2.Length then
                                 if Array.isEmpty a1 then
                                     true
@@ -37,5 +36,5 @@ type ArrayEqualityComparerAdapter() =
                         |> snd
                         |> Array.map(loopElement.GetHashCode)
                         |> hash
-            }
-
+            })
+    else None

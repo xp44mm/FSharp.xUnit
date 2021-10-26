@@ -1,6 +1,5 @@
 ﻿module FSharp.xUnit.Should
 
-open Xunit
 open Xunit.Sdk
 open FSharp.Literals
 

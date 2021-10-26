@@ -1,21 +1,15 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.NullableEqualityComparer
 
 open System
 open System.Collections
-open FSharp.xUnit
 open FSharp.Idioms
 open FSharp.Literals
 
-type NullableEqualityComparerAdapter() =
-    static member Singleton = NullableEqualityComparerAdapter() :> EqualityComparerAdapter
-    interface EqualityComparerAdapter with
-        member this.filter ty = 
-            ty.IsGenericType && ty.GetGenericTypeDefinition() = typedefof<Nullable<_>>
-
-        member this.getEqualityComparer(loop,ty) =
+let tryGet (ty: Type) =
+    if ty.IsGenericType && ty.GetGenericTypeDefinition() = typedefof<Nullable<_>> then
+        Some(fun (loop:Type -> IEqualityComparer) -> 
             let elementType = ty.GenericTypeArguments.[0]
             let loopElement = loop elementType
-
             {
                 new IEqualityComparer with
                     member this.Equals(ls1,ls2) =
@@ -31,5 +25,5 @@ type NullableEqualityComparerAdapter() =
                         else 
                             loopElement.GetHashCode ls |> Array.singleton
                         |> hash
-            }
-
+            })
+    else None

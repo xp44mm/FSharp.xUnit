@@ -1,20 +1,17 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.MapEqualityComparer
 
 open System.Collections
 open FSharp.xUnit
 open System
 open FSharp.Idioms
+open Microsoft.FSharp.Reflection
 
-type SetEqualityComparerAdapter() =
-    static member Singleton = SetEqualityComparerAdapter() :> EqualityComparerAdapter
-
-    interface EqualityComparerAdapter with
-        member this.filter ty = ty.IsGenericType && ty.GetGenericTypeDefinition() = typedefof<Set<_>>
-        member this.getEqualityComparer(loop,ty) =
-            let elementType = ty.GenericTypeArguments.[0]
-            let reader = SetType.readSet ty
+let tryGet(ty: Type) =
+    if ty.IsGenericType && ty.GetGenericTypeDefinition() = typedefof<Map<_,_>> then
+        Some(fun (loop:Type -> IEqualityComparer) ->
+            let reader = MapType.readMap ty
+            let elementType = FSharpType.MakeTupleType(ty.GenericTypeArguments)
             let loopElement = loop elementType
-
             {
                 new IEqualityComparer with
                     member this.Equals(ls1,ls2) = 
@@ -30,4 +27,5 @@ type SetEqualityComparerAdapter() =
                         |> snd
                         |> Array.map(loopElement.GetHashCode)
                         |> hash
-            }
+            })
+    else None

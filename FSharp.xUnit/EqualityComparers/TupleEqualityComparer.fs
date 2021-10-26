@@ -1,4 +1,5 @@
-﻿namespace FSharp.xUnit.EqualityComparerAdapters
+﻿module FSharp.xUnit.TupleEqualityComparer
+
 
 open System.Collections
 open FSharp.xUnit
@@ -6,12 +7,9 @@ open System
 open FSharp.Idioms
 open Microsoft.FSharp.Reflection
 
-type TupleEqualityComparerAdapter() =
-    static member Singleton = TupleEqualityComparerAdapter() :> EqualityComparerAdapter
-
-    interface EqualityComparerAdapter with
-        member this.filter ty = FSharpType.IsTuple ty
-        member this.getEqualityComparer(loop,ty) =
+let tryGet(ty: Type) =
+    if FSharpType.IsTuple ty then
+        Some(fun (loop:Type -> IEqualityComparer) ->
             let reader = TupleType.readTuple ty
             let elementTypes = FSharpType.GetTupleElements ty
             let loopElements = elementTypes |> Array.map(loop)
@@ -30,5 +28,7 @@ type TupleEqualityComparerAdapter() =
                         |> Array.zip loopElements
                         |> Array.map(fun(loopElement,a1) -> loopElement.GetHashCode(a1))
                         |> hash
-            }
+            })
+    else None
+
 

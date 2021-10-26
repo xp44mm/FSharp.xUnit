@@ -5,9 +5,10 @@ open Xunit
 open Xunit.Abstractions
 open FSharp.xUnit
 open FSharp.Literals
+open System.Collections.Generic
 
 type Test(output:ITestOutputHelper) =
-    let should = Register()
+    let should = EqualConfig()
     [<Fact>]
     member _.``My test`` () =
         Should.equal 1 1
@@ -53,5 +54,10 @@ type Test(output:ITestOutputHelper) =
     member _.``seq test`` () =
         let x = seq { 1..3}
         let y = seq { 1; 2; 3}
-        //let comparer = EqualityComparer.mainEqualityComparer<seq<int>> EqualityComparer.enableEqualityComparers
+        should.equal x y
+
+    [<Fact>]
+    member _.``HashSet test`` () =
+        let x = HashSet([ 1..3])
+        let y = HashSet([ 1..3])
         should.equal x y
