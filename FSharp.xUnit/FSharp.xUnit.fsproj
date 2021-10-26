@@ -10,7 +10,7 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.0</Version>
+		<Version>1.2.1</Version>
 		<PackageReleaseNotes>change to tryGet config</PackageReleaseNotes>
 	</PropertyGroup>
 
@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FSharp.Idioms" Version="1.1.14" />
-		<PackageReference Include="FSharp.Literals" Version="2.2.3" />
+		<PackageReference Include="FSharp.Literals" Version="2.2.4" />
 		<PackageReference Include="xunit.assert" Version="2.4.1" />
 	</ItemGroup>
 

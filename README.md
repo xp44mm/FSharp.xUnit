@@ -27,11 +27,9 @@ let ``My test`` () =
 使用自定义的相等比较器，先配置比较器，newtonsoft.net是.net流行的json库，但是`JProperty`缺少结构化比较的方法，这个代码示例演示如何定义适配器：
 
 ```F#
-type JPropertyEqualityComparerAdapter() =
-    static member Singleton = JPropertyEqualityComparerAdapter() :> EqualityComparerAdapter
-    interface EqualityComparerAdapter with
-        member this.filter ty = ty = typeof<JProperty>
-        member this.getEqualityComparer(loop,ty) =
+let tryGetJProperty (ty: Type) =
+    if ty = typeof<JProperty> then
+        Some(fun (loop:Type -> IEqualityComparer) -> 
             let stringComparer = loop typeof<string>
             let jTokenEqualityComparer = JTokenEqualityComparer()
             {
@@ -43,24 +41,24 @@ type JPropertyEqualityComparerAdapter() =
                     member this.GetHashCode(p) = 
                         let p = unbox<JProperty> p
                         hash [|stringComparer.GetHashCode p.Name; jTokenEqualityComparer.GetHashCode p.Value|]
-            }
-
-type JTokenEqualityComparerAdapter() =
-    static member Singleton = JTokenEqualityComparerAdapter() :> EqualityComparerAdapter
-    interface EqualityComparerAdapter with
-        member this.filter ty = typeof<JToken>.IsAssignableFrom ty
-        member this.getEqualityComparer(loop,ty) =
+            })
+    else None
+    
+let tryGetJToken  (ty: Type) =
+    if typeof<JToken>.IsAssignableFrom ty then
+        Some(fun (loop:Type -> IEqualityComparer) -> 
             let genericComp = JTokenEqualityComparer()
             {
                 new IEqualityComparer with
                     member this.Equals(p1,p2) = genericComp.Equals(unbox<JToken> p1,unbox<JToken> p2)
                     member this.GetHashCode(p) = 
                         genericComp.GetHashCode(unbox<JToken> p)
-            }
+            })
+    else None
 
-let should = Register.``override``[
-    JPropertyEqualityComparerAdapter.Singleton
-    JTokenEqualityComparerAdapter.Singleton
+let should = EqualConfig.``override``[ 
+    tryGetJProperty
+    tryGetJToken
     ]
 ```
 
