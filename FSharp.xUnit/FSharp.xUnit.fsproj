@@ -10,8 +10,9 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.1</Version>
-		<PackageReleaseNotes>change to tryGet config</PackageReleaseNotes>
+		<Version>1.2.2</Version>
+		<PackageReleaseNotes>update net6</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -31,13 +32,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FSharp.Idioms" Version="1.1.14" />
-		<PackageReference Include="FSharp.Literals" Version="2.2.4" />
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FSharp.Idioms" Version="1.1.22" />
+		<PackageReference Include="FSharp.Literals" Version="2.2.9" />
 		<PackageReference Include="xunit.assert" Version="2.4.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Update="FSharp.Core" Version="6.0.0" />
+		<PackageReference Update="FSharp.Core" Version="6.0.3" />
 	</ItemGroup>
 
 </Project>
