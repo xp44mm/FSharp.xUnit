@@ -18,7 +18,6 @@ let getters = [
 ]
 
 let rec mainTryGetDynamic (getters: seq<Type -> ((Type -> IEqualityComparer) -> IEqualityComparer) option>) (ty:Type) =
-    //Console.WriteLine(Render.stringify ty)
     let pickedTryGet =
         getters
         |> Seq.tryPick(fun tryGet -> tryGet ty)

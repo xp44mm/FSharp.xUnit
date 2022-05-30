@@ -76,3 +76,20 @@ member this.``translateFields``() =
 
 相反的操作`should.notEqual`
 
+### ClassDataBase
+
+```Fsharp
+open FSharp.xUnit
+
+type MyArrays1() = 
+    inherit ClassDataBase([ 
+        [| 3; 4 |]; 
+        [| 32; 42 |] 
+    ])
+
+type ClassDataBaseTest(output:ITestOutputHelper) =
+    [<Theory>]
+    [<ClassData(typeof<MyArrays1>)>]
+    member _.v1 (a : int, b : int) = 
+        Assert.NotEqual(a, b)
+```
