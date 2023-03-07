@@ -93,3 +93,33 @@ type ClassDataBaseTest(output:ITestOutputHelper) =
     member _.v1 (a : int, b : int) = 
         Assert.NotEqual(a, b)
 ```
+
+### TheoryDataSource
+
+TheoryDataSource 向构造函数提供一个键值对列表，成员keys提供给MemberData，索引属性提供额外数据字段。
+
+```FSharp
+namespace FSharp.xUnit
+
+open Xunit
+open Xunit.Abstractions
+open FSharp.xUnit
+
+type TheoryDataSourceTest(output:ITestOutputHelper) =
+    //* ctor
+    static let dataSource = TheoryDataSource([
+        0,[]
+        1,[()]
+        2,[();()]
+    ])
+
+    //* keys
+    static member keys = dataSource.keys
+
+    [<Theory>]
+    [<MemberData(nameof TheoryDataSourceTest.keys)>]
+    member _.``unit list test`` (x) =
+        let y = List.replicate x ()
+        let e = dataSource.[x] //*
+        Should.equal e y
+```

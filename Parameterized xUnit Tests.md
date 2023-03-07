@@ -91,3 +91,40 @@ type MemberDataTest(output:ITestOutputHelper) =
 ```
 
 It takes the list of tuples and transforms it to the `seq<obj[]>` that XUnit expects.
+
+## 用例
+
+此用例，使用`Map`绕过xUnit不支持的数据类型，在测试资源管理器显示`MemberData`多行。
+
+```Fsharp
+type UnifyVoidElementTest(output:ITestOutputHelper) =
+    let show res =
+        res
+        |> Render.stringify
+        |> output.WriteLine
+
+    static let source = [
+            "<br/>",[{index= 0;length= 5;value= TagSelfClosing("br",[])}]
+            "<p><br></br></p>",[{index= 0;length= 3;value= TagStart("p",[])};{index= 3;length= 4;value= TagSelfClosing("br",[])};{index= 12;length= 4;value= TagEnd "p"}]
+        ]
+
+    static let mp = Map.ofList source
+
+    static member keys = 
+        source
+        |> Seq.map (fst>>Array.singleton)
+        
+    [<Theory;MemberData(nameof UnifyVoidElementTest.keys)>]
+    member _.``self closing``(x:string) =
+        let y = 
+            x
+            |> SeniorTokenizer.tokenize
+            |> Seq.choose (HtmlTokenSeniorUtils.unifyVoidElement)
+            |> Seq.toList
+
+        let a = mp.[x]
+        show y
+        Should.equal y a
+```
+
+此例中，所有的数据都收集在`source`中，构成一个行列表。每行是一个记录元组，第一项是输入数据，字符串类型。第二项输出数据，复杂类型。且第一项就是元组的键。`Theory`所需要的`keys`仅取第一项，因为每个键是xunit支持的类型，可以Theory分行显示，而剩余的数据部分，在测试方法中通过`mp.[x]`查询Map来获得。
