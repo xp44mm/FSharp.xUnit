@@ -12,13 +12,14 @@
     <Compile Include="MemberDataTest.fs" />
     <Compile Include="ParameterizedxUnitTest.fs" />
     <Compile Include="ClassDataBaseTest.fs" />
-    <Compile Include="TheoryDataSourceTest.fs" />
+    <Compile Include="SingleDataSourceTest.fs" />
+    <Compile Include="TupleDataSourceTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FSharp.Literals" Version="2.2.11" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <PrivateAssets>all</PrivateAssets>
@@ -35,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="7.0.0" />
+    <PackageReference Update="FSharp.Core" Version="7.0.200" />
   </ItemGroup>
 
 </Project>

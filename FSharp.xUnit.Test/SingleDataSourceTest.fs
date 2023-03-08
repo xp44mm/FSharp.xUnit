@@ -4,8 +4,8 @@ open Xunit
 open Xunit.Abstractions
 open FSharp.xUnit
 
-type TheoryDataSourceTest(output:ITestOutputHelper) =
-    static let dataSource = TheoryDataSource([
+type SingleDataSourceTest(output:ITestOutputHelper) =
+    static let dataSource = SingleDataSource([
         0,[]
         1,[()]
         2,[();()]
@@ -14,7 +14,7 @@ type TheoryDataSourceTest(output:ITestOutputHelper) =
     static member keys = dataSource.keys
 
     [<Theory>]
-    [<MemberData(nameof TheoryDataSourceTest.keys)>]
+    [<MemberData(nameof SingleDataSourceTest.keys)>]
     member _.``unit list test`` (x) =
         let y = List.replicate x ()
         let e = dataSource.[x]
