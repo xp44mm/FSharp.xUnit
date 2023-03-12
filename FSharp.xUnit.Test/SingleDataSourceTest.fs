@@ -5,6 +5,7 @@ open Xunit.Abstractions
 open FSharp.xUnit
 
 type SingleDataSourceTest(output:ITestOutputHelper) =
+
     static let dataSource = SingleDataSource([
         0,[]
         1,[()]
