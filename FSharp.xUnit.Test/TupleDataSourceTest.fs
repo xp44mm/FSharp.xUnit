@@ -12,7 +12,7 @@ type TupleDataSourceTest (output:ITestOutputHelper) =
         (2,"c"),[();()]
     ])
 
-    static member tupleDataSource = tuples.dataSource
+    static member tupleDataSource = tuples.keys
 
     [<Theory>]
     [<MemberData(nameof TupleDataSourceTest.tupleDataSource)>]

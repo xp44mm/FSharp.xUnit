@@ -78,7 +78,9 @@ member this.``translateFields``() =
 
 ### SingleDataSource
 
-单参数数据源`SingleDataSource`向构造函数提供一个键值对列表，成员`dataSource`提供给`MemberData`特性，索引属性提供不在参数表的额外数据。
+单参数数据源
+
+`SingleDataSource`向构造函数提供一个键值对列表，成员`dataSource`提供给`MemberData`特性，索引属性提供不在参数表的额外数据。
 
 使用方法：.\FSharp.xUnit.Test\SingleDataSourceTest.fs
 
@@ -87,6 +89,14 @@ member this.``translateFields``() =
 多参数数据源
 
 使用方法：.\FSharp.xUnit.Test\TupleDataSourceTest.fs
+
+### ArrayDataSource
+
+变长参数数据源
+
+使用方法：.\FSharp.xUnit.Test\ArrayDataSourceTest.fs
+
+
 
 ### ClassDataBase
 

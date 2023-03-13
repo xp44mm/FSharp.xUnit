@@ -10,8 +10,8 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.6</Version>
-		<PackageReleaseNotes>SingleDataSource</PackageReleaseNotes>
+		<Version>1.2.7</Version>
+		<PackageReleaseNotes>ArrayDataSource</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
@@ -32,6 +32,7 @@
 		<Compile Include="ClassDataBase.fs" />
 		<Compile Include="SingleDataSource.fs" />
 		<Compile Include="TupleDataSource.fs" />
+		<Compile Include="ArrayDataSource.fs" />
 	</ItemGroup>
 
 	<ItemGroup>

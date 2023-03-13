@@ -14,6 +14,7 @@
     <Compile Include="ClassDataBaseTest.fs" />
     <Compile Include="SingleDataSourceTest.fs" />
     <Compile Include="TupleDataSourceTest.fs" />
+    <Compile Include="ArrayDataSourceTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
