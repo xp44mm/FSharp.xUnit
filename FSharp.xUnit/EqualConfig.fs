@@ -20,12 +20,12 @@ type EqualConfig(getters: seq<Type -> ((Type -> IEqualityComparer) -> IEqualityC
         else
             let ex = Render.stringify expected
             let ac = Render.stringify actual
-            raise <| EqualException(ex, ac)
+            raise <| EqualException.ForMismatchedValues(ex, ac)
 
     member this.notEqual<'a> (expected:'a) actual = 
         let comparer = EqualityComparer.toGenericIEqualityComparer<'a> getters
         if comparer.Equals(expected,actual) then
             let ex = Render.stringify expected
             let ac = Render.stringify actual
-            raise <| NotEqualException(ex, ac)
+            raise <| NotEqualException.ForEqualValues(ex, ac)
     

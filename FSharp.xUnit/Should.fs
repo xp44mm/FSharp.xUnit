@@ -9,11 +9,11 @@ let equal<'a when 'a:equality > (expected:'a) actual =
     else
         let ex = Render.stringify expected
         let ac = Render.stringify actual
-        raise <| EqualException(ex, ac)
+        raise <| EqualException.ForMismatchedValues(ex, ac)
 
 let notEqual<'a when 'a:equality > (expected:'a) actual = 
     if expected = actual then
         let ex = Render.stringify expected
         let ac = Render.stringify actual
-        raise <| NotEqualException(ex, ac)
+        raise <| NotEqualException.ForEqualValues(ex, ac)
 
