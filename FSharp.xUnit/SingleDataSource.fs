@@ -13,8 +13,7 @@ type SingleDataSource<'k,'v when 'k:comparison>(source:list<'k*'v>) =
         if  allowedType ty || ty.IsArray && allowedType(ty.GetElementType()) then
             source
             |> Seq.map (fst>>box>>Array.singleton)
-        else failwith $"expect primitive or string but: {ty}"
-
+        else failwith $"expect primitive or string but {ty}"
 
     ///
     member _.Item with get(key) = mp.[key]

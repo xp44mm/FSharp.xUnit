@@ -4,12 +4,6 @@ The class library extends `xunit` to assert equal.
 
 - It's easier to customize the `IEqualityComparer`.
 
-## install
-
-```pm
-Install-Package FSharp.xUnit
-```
-
 ## GetStarted 
 
 使用系统默认的相等比较器：

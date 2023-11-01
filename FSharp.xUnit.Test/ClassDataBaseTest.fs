@@ -5,18 +5,19 @@ open Xunit.Abstractions
 open FSharp.xUnit
 open FSharp.Reflection
 
-type MyArrays1() = 
-    inherit ClassDataBase([ 
+type MyArrays1() = inherit ClassDataBase(
+    [ 
         [| 3; 4 |]; 
         [| 32; 42 |] 
     ])
 
-type MyArrays2() = 
-    inherit ClassDataBase([ 
+type MyArrays2() = inherit ClassDataBase(
+    [ 
         ("smallest prime?", 2, true)
         ("how many roads must a man walk down?", 41, false)
-    ] |> Seq.map FSharpValue.GetTupleFields
-)
+    ] 
+    |> Seq.map FSharpValue.GetTupleFields
+    )
 
 type ClassDataBaseTest(output:ITestOutputHelper) =
 

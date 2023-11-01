@@ -1,31 +1,36 @@
 ﻿namespace FSharp.xUnit
 
-open FSharp.xUnit
-open Xunit.Sdk
-open FSharp.Literals
 open System
-open System.Collections
 
-type EqualConfig(getters: seq<Type -> ((Type -> IEqualityComparer) -> IEqualityComparer) option>) =
-    new() = EqualConfig(EqualityComparer.getters)
+open Xunit.Sdk
+open FSharp.Idioms.Literals.ValuePrinterUtils
+open FSharp.xUnit.EqualityComparers
 
-    static member ``override`` (newAdapters:seq<Type -> ((Type -> IEqualityComparer) -> IEqualityComparer) option>) = 
-        let getters = newAdapters |> Seq.append <| EqualityComparer.getters
-        EqualConfig(getters)
+type EqualConfig(getters: list<Type -> EqualityComparerCase> ) =
 
     member this.equal<'a> (expected:'a) actual = 
-        let comparer = EqualityComparer.toGenericIEqualityComparer<'a> getters
+        let comparer = EqualityComparerUtils.toGenericIEqualityComparer<'a> getters
         if comparer.Equals(expected,actual) then
             ()
         else
-            let ex = Render.stringify expected
-            let ac = Render.stringify actual
-            raise <| EqualException.ForMismatchedValues(ex, ac)
+            let ex = stringify expected
+            let ac = stringify actual
+            EqualException.ForMismatchedValues(ex, ac)
+            |> raise
 
     member this.notEqual<'a> (expected:'a) actual = 
-        let comparer = EqualityComparer.toGenericIEqualityComparer<'a> getters
+        let comparer = EqualityComparerUtils.toGenericIEqualityComparer<'a> getters
         if comparer.Equals(expected,actual) then
-            let ex = Render.stringify expected
-            let ac = Render.stringify actual
-            raise <| NotEqualException.ForEqualValues(ex, ac)
+            let ex = stringify expected
+            let ac = stringify actual
+            NotEqualException.ForEqualValues(ex, ac)
+            |> raise
     
+    new() = EqualConfig(EqualityComparerUtils.cases)
+
+    [<Obsolete("EqualConfig [...;yield! EqualityComparerUtils.cases]")>]
+    static member ``override`` (newAdapters:list<Type -> EqualityComparerCase>) = 
+        EqualConfig [
+            yield! newAdapters 
+            yield! EqualityComparerUtils.cases
+        ]

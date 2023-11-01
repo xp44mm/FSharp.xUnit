@@ -1,11 +1,9 @@
-module Program
+module FSharp.xUnit.Program
 
 open System
 open Xunit
 open Xunit.Abstractions
-open FSharp.xUnit
-open FSharp.Literals
-//open FSharpCompiler.Parsing
+open FSharp.Idioms.Literal
 
 
 let [<EntryPoint>] main _ = 

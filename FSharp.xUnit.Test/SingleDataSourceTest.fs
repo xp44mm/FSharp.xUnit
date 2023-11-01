@@ -2,8 +2,8 @@
 
 open Xunit
 open Xunit.Abstractions
-open FSharp.xUnit
-open FSharp.Literals.Literal
+open FSharp.Idioms.Literals.ValuePrinterUtils
+
 type IntDS() =
     static let ds = SingleDataSource([
         0,[]
@@ -22,14 +22,12 @@ type SingleDataSourceTest(output:ITestOutputHelper) =
 
     static member keys = arrs.keys
 
-
     [<Theory>]
     [<MemberData(nameof IntDS.keys,MemberType=typeof<IntDS>)>]
     member _.``unit list test`` (x:int) =
         let y = List.replicate x ()
         let e = IntDS.get x
         Should.equal e y
-
 
     [<Theory>]
     [<MemberData(nameof SingleDataSourceTest.keys)>]

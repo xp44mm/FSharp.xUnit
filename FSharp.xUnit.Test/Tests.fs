@@ -1,14 +1,24 @@
 namespace FSharp.xUnit
 
 open System
+open System.Collections.Generic
+
 open Xunit
 open Xunit.Abstractions
-open FSharp.xUnit
-open FSharp.Literals
-open System.Collections.Generic
+
+open FSharp.Idioms.Literal
 
 type Test(output:ITestOutputHelper) =
     let should = EqualConfig()
+
+    [<Theory>]
+    [<InlineData()>] // **note**
+    [<InlineData(1)>]
+    [<InlineData(1,2)>]
+    member _.``variable arguments`` ([<System.ParamArray>]sq:int[]) =
+        for i in sq do
+            output.WriteLine($"{i}")
+
     [<Fact>]
     member _.``My test`` () =
         Should.equal 1 1
@@ -40,7 +50,7 @@ type Test(output:ITestOutputHelper) =
 
     [<Fact>]
     member _.``set test`` () =
-        should.equal (set[1]) (set[1])
+        should.equal (set [1]) (set [1])
 
     [<Fact>]
     member _.``map test`` () =
@@ -52,8 +62,8 @@ type Test(output:ITestOutputHelper) =
 
     [<Fact>]
     member _.``seq test`` () =
-        let x = seq { 1..3}
-        let y = seq { 1; 2; 3}
+        let x = seq { 1..3 }
+        let y = seq { 1; 2; 3 }
         should.equal x y
 
     [<Fact>]
