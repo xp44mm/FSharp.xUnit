@@ -5,7 +5,7 @@ open System
 open Xunit
 open Xunit.Abstractions
 
-open FSharp.Idioms.Literals.ValuePrinterUtils
+open FSharp.Idioms.Literal
 
 type ListDS()=
     static let ds = ArrayDataSource [

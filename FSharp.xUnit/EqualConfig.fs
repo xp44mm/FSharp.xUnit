@@ -3,7 +3,7 @@
 open System
 
 open Xunit.Sdk
-open FSharp.Idioms.Literals.ValuePrinterUtils
+open FSharp.Idioms.Literal
 open FSharp.xUnit.EqualityComparers
 
 type EqualConfig(getters: list<Type -> EqualityComparerCase> ) =

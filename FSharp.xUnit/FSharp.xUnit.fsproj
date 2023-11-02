@@ -10,7 +10,7 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.14</Version>
+		<Version>1.2.15</Version>
 		<PackageReleaseNotes>refac</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -35,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FSharp.Idioms" Version="1.4.1" />
+		<PackageReference Include="FSharp.Idioms" Version="1.4.2" />
 		<PackageReference Include="xunit.assert" Version="2.6.0" />
 	</ItemGroup>
 
