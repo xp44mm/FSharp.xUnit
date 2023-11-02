@@ -7,7 +7,6 @@ open FSharp.Idioms
 open FSharp.xUnit.EqualityComparers.EqualityComparerCases
 
 let cases = [
-    NullableEqualityComparerCase
     ArrayEqualityComparerCase
     TupleEqualityComparerCase
     RecordEqualityComparerCase
@@ -16,6 +15,7 @@ let cases = [
     MapEqualityComparerCase
     UnionEqualityComparerCase
     SeqEqualityComparerCase
+    NullableEqualityComparerCase
 ]
 
 let rec mainTryGetDynamic (getters: list<Type->EqualityComparerCase>) (ty:Type) =

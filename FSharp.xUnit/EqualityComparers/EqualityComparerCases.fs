@@ -7,29 +7,6 @@ open System.Collections.Generic
 open FSharp.Idioms
 open FSharp.Reflection
 
-let NullableEqualityComparerCase (ty: Type) =
-    {
-        finder = ty.IsGenericType && ty.GetGenericTypeDefinition() = typedefof<Nullable<_>>
-        get = fun (loop:Type -> IEqualityComparer) -> 
-            let elementType = ty.GenericTypeArguments.[0]
-            let loopElement = loop elementType
-            {
-                new IEqualityComparer with
-                    member this.Equals(ls1,ls2) =
-                        if ls1 = null && ls2 = null then
-                            true
-                        elif ls1 = null || ls2 = null then
-                            false
-                        else
-                            loopElement.Equals(ls1,ls2)
-                    member this.GetHashCode(ls) = 
-                        if ls = null then 
-                            Array.empty 
-                        else 
-                            loopElement.GetHashCode ls |> Array.singleton
-                        |> hash
-            }
-    }
     
 let ArrayEqualityComparerCase (ty: Type) =
     {
@@ -268,6 +245,29 @@ let SeqEqualityComparerCase (ty: Type) =
                                 else true
                             loopNext 0
                     member this.GetHashCode(ls) = hash ls
+            }
+    }
+let NullableEqualityComparerCase (ty: Type) =
+    {
+        finder = ty.IsGenericType && ty.GetGenericTypeDefinition() = typedefof<Nullable<_>>
+        get = fun (loop:Type -> IEqualityComparer) -> 
+            let elementType = ty.GenericTypeArguments.[0]
+            let loopElement = loop elementType
+            {
+                new IEqualityComparer with
+                    member this.Equals(ls1,ls2) =
+                        if ls1 = null && ls2 = null then
+                            true
+                        elif ls1 = null || ls2 = null then
+                            false
+                        else
+                            loopElement.Equals(ls1,ls2)
+                    member this.GetHashCode(ls) = 
+                        if ls = null then 
+                            Array.empty 
+                        else 
+                            loopElement.GetHashCode ls |> Array.singleton
+                        |> hash
             }
     }
 

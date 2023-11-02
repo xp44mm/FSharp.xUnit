@@ -10,8 +10,8 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.15</Version>
-		<PackageReleaseNotes>refac</PackageReleaseNotes>
+		<Version>1.2.16</Version>
+		<PackageReleaseNotes>Should use inner =</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 

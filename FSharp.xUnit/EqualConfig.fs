@@ -10,9 +10,7 @@ type EqualConfig(getters: list<Type -> EqualityComparerCase> ) =
 
     member this.equal<'a> (expected:'a) actual = 
         let comparer = EqualityComparerUtils.toGenericIEqualityComparer<'a> getters
-        if comparer.Equals(expected,actual) then
-            ()
-        else
+        if comparer.Equals(expected,actual) |> not then
             let ex = stringify expected
             let ac = stringify actual
             EqualException.ForMismatchedValues(ex, ac)
