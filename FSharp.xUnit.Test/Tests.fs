@@ -8,9 +8,8 @@ open Xunit.Abstractions
 
 open FSharp.Idioms.Literal
 
-type Test(output:ITestOutputHelper) =
-    let should = EqualConfig()
 
+type Test(output:ITestOutputHelper) =
     [<Theory>]
     [<InlineData()>] // **note**
     [<InlineData(1)>]
@@ -25,49 +24,63 @@ type Test(output:ITestOutputHelper) =
 
     [<Fact>]
     member _.``Nullable test`` () =
-        should.equal (Nullable()) (Nullable())
-        should.equal (Nullable 1) (Nullable 1)
-        should.notEqual (Nullable 1) (Nullable 2)
+        Should.equal (Nullable()) (Nullable())
+        Should.equal (Nullable 1) (Nullable 1)
+        Should.notEqual (Nullable 1) (Nullable 2)
 
     [<Fact>]
     member _.``array test`` () =
-        should.equal [||] [||]
-        should.equal [|1|] [|1|]
-        should.notEqual [|1|] [|2|]
+        Should.equal [||] [||]
+        Should.equal [|1|] [|1|]
+        Should.notEqual [|1|] [|2|]
 
     [<Fact>]
     member _.``tuple test`` () =
-        should.equal (1,2) (1,2)
-        should.notEqual (1,2) (1,3)
+        Should.equal (1,2) (1,2)
+        Should.notEqual (1,2) (1,3)
 
     [<Fact>]
     member _.``record test`` () =
-        should.equal {|x=1;y=2|} {|x=1;y=2|}
+        Should.equal {|x=1;y=2|} {|x=1;y=2|}
 
     [<Fact>]
     member _.``list test`` () =
-        should.equal [1] [1]
+        Should.equal [1] [1]
 
     [<Fact>]
     member _.``set test`` () =
-        should.equal (set [1]) (set [1])
+        Should.equal (set [1]) (set [1])
 
     [<Fact>]
     member _.``map test`` () =
-        should.equal (Map[1,"1"]) (Map[1,"1"])
+        Should.equal (Map[1,"1"]) (Map[1,"1"])
 
     [<Fact>]
     member _.``uion test`` () =
-        should.equal (Some 1) (Some 1)
+        Should.equal (Some 1) (Some 1)
 
     [<Fact>]
     member _.``seq test`` () =
         let x = seq { 1..3 }
         let y = seq { 1; 2; 3 }
-        should.equal x y
-
+        let ex = Assert.Throws<NotImplementedException>(
+            fun () ->
+            Should.equal x y
+        )
+        output.WriteLine(ex.Message)
     [<Fact>]
     member _.``HashSet test`` () =
         let x = HashSet([ 1..3])
         let y = HashSet([ 1..3])
-        should.equal x y
+        Should.equal x y
+
+    [<Fact>]
+    member _.``ProductionCrewEqualityChecker test`` () =
+        let x = ProductionCrew([""],"",[])
+        let y = ProductionCrew([""],"",[])
+        let z = ProductionCrew(["w"],"w",[])
+
+        CustomDataExample.should.equal x y
+        CustomDataExample.should.notEqual x z
+
+

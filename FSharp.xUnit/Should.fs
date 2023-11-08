@@ -1,19 +1,12 @@
 ﻿module FSharp.xUnit.Should
 
-open FSharp.Idioms.Literal
 open Xunit.Sdk
+open FSharp.Idioms.Literal
+open FSharp.Idioms.EqualityCheckers
+
+let config<'t> = EqualConfig<'t>(EqualityCheckerUtils.equals)
 
 let equal<'a when 'a:equality> (expected:'a) actual =
-    if expected <> actual then
-        let ex = stringify expected
-        let ac = stringify actual
-        EqualException.ForMismatchedValues(ex, ac)
-        |> raise
-
+    config<'a>.equal expected actual
 let notEqual<'a when 'a:equality> (expected:'a) actual = 
-    if expected = actual then
-        let ex = stringify expected
-        let ac = stringify actual
-        NotEqualException.ForEqualValues(ex, ac)
-        |> raise
-
+    config<'a>.notEqual expected actual
