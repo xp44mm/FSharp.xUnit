@@ -10,8 +10,8 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.17</Version>
-		<PackageReleaseNotes>Should use inner =</PackageReleaseNotes>
+		<Version>1.2.18</Version>
+		<PackageReleaseNotes>nuget update</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FSharp.Idioms" Version="1.4.3" />
+		<PackageReference Include="FSharp.Idioms" Version="1.4.4" />
 		<PackageReference Include="xunit.assert" Version="2.6.1" />
 	</ItemGroup>
 
