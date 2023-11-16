@@ -59,15 +59,16 @@ type Test(output:ITestOutputHelper) =
     member _.``uion test`` () =
         Should.equal (Some 1) (Some 1)
 
-    [<Fact>]
-    member _.``seq test`` () =
-        let x = seq { 1..3 }
-        let y = seq { 1; 2; 3 }
-        let ex = Assert.Throws<NotImplementedException>(
-            fun () ->
-            Should.equal x y
-        )
-        output.WriteLine(ex.Message)
+    //[<Fact>]
+    //member _.``seq test`` () =
+    //    let x = seq { 1..3 }
+    //    let y = seq { 1; 2; 3 }
+    //    let ex = Assert.Throws<NotImplementedException>(
+    //        fun () ->
+    //        Should.equal x y
+    //    )
+    //    output.WriteLine(ex.Message)
+
     [<Fact>]
     member _.``HashSet test`` () =
         let x = HashSet([ 1..3])

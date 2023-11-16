@@ -5,13 +5,12 @@ open Xunit
 open Xunit.Abstractions
 open FSharp.Idioms.Literal
 
+open System.Collections.Generic
 
 let [<EntryPoint>] main _ = 
-    //let comparer = EqualityComparer.Automata<ParseTree<string>> EqualityComparer.adapters
-    //let x = Interior("value",[Interior("object",[Terminal ""])])
-    //let y = Interior("value",[Interior("object",[Terminal ""])])
-    //Console.WriteLine(Render.stringify <| comparer.GetType())
-    //let res = comparer.Equals(x,y)
-    //Console.WriteLine(Render.stringify res)
+    let x = HashSet [1;2;3]
+    let y = HashSet [1;2;3]
+    Console.WriteLine($"{x=y}")
+    Console.WriteLine($"{x.SetEquals y}")
 
     0
