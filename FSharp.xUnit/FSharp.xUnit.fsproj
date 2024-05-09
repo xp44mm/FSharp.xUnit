@@ -4,17 +4,18 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <IsPackable>true</IsPackable>
 		<Authors>xp44m</Authors>
 		<Company>34696643@qq.com</Company>
 		<PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
-		<Description>The class library extends `xunit` to assert equal. It output data in F# style. It's easier to customize the IEqualityComparer.</Description>
+		<Description>The class library extends xunit to assert equal. It output data in F# style. It's easier to customize the IEqualityComparer.</Description>
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
 		<Version>1.2.27</Version>
 		<PackageReleaseNotes>NaturalAttribute</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>FSharp.xUnit</Title>
 	</PropertyGroup>
 
 	<ItemGroup>    
@@ -36,7 +37,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="FSharp.Idioms" Version="1.4.20" />
-		<PackageReference Include="xunit" Version="2.8.0" />
+		<PackageReference Include="xunit.assert" Version="2.8.0" />
+		<PackageReference Include="xunit.core" Version="2.8.0" />
 	</ItemGroup>
 
 	<ItemGroup>
