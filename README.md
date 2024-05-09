@@ -28,6 +28,30 @@ let ``My test`` () =
 
 相反的操作`should.notEqual`
 
+## NaturalAttribute
+
+Natural number sequence Theory is the simplest form of testing our theory with data.
+
+```F#
+type NaturalAttributeTest(output: ITestOutputHelper) =
+    [<Theory>]
+    [<Natural(4)>]
+    member _.``Natural Number Sequence``(i:int) =
+        let expect = [0;1;2;3]
+        let actual = [0;1;2;3]
+        Should.equal expect.[i] actual.[i]
+```
+
+`[<Natural(4)>]` is same as 
+
+```F#
+    [<Theory>]
+    [<InlineData(0)>]
+    [<InlineData(1)>]
+    [<InlineData(2)>]
+    [<InlineData(3)>]
+```
+
 ### SingleDataSource
 
 单参数数据源
