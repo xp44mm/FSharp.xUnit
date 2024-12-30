@@ -12,8 +12,8 @@
 		<Copyright>xp44mm</Copyright>
 		<RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-		<Version>1.2.29</Version>
-		<PackageReleaseNotes>update nuget package.</PackageReleaseNotes>
+		<Version>1.2.30</Version>
+		<PackageReleaseNotes>fsharp.idioms</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Title>FSharp.xUnit</Title>
 	</PropertyGroup>
@@ -36,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FSharp.Idioms" Version="1.4.25" />
+		<PackageReference Include="FSharp.Idioms" Version="1.4.26" />
 		<PackageReference Include="xunit.assert" Version="2.9.2" />
 		<PackageReference Include="xunit.core" Version="2.9.2" />
 	</ItemGroup>
