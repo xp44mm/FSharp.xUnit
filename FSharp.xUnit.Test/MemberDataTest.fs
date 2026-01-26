@@ -1,7 +1,7 @@
 ﻿namespace FSharp.xUnit
 
 open Xunit
-open Xunit.Abstractions
+//open Xunit.Abstractions
 open FSharp.Reflection
 
 type TestData() =

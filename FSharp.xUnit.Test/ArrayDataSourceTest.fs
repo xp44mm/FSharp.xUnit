@@ -3,7 +3,7 @@
 open System
 
 open Xunit
-open Xunit.Abstractions
+//open Xunit.Abstractions
 
 open FSharp.Idioms.Literal
 

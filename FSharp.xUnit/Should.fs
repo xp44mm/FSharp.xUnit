@@ -6,7 +6,6 @@ open FSharp.Idioms.EqualityComparers
 
 let config<'t> = EqualConfig<'t>(EqualityComparerUtils.equal)
 
-let equal<'a when 'a:equality> (expected:'a) actual =
-    config<'a>.equal expected actual
-let notEqual<'a when 'a:equality> (expected:'a) actual = 
-    config<'a>.notEqual expected actual
+let equal<'a when 'a: equality> (expected: 'a) actual = config<'a>.equal expected actual
+
+let notEqual<'a when 'a: equality> (expected: 'a) actual = config<'a>.notEqual expected actual

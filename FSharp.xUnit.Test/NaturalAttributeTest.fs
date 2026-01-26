@@ -4,7 +4,7 @@ open System
 open System.Collections.Generic
 
 open Xunit
-open Xunit.Abstractions
+//open Xunit.Abstractions
 
 open FSharp.Idioms.Literal
 
