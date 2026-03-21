@@ -1,45 +1,45 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <IsPackable>false</IsPackable>
+        <GenerateProgramFile>false</GenerateProgramFile>
+    </PropertyGroup>
 
-    <IsPackable>false</IsPackable>
-    <GenerateProgramFile>false</GenerateProgramFile>
-  </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="ReflectionTest.fs" />
+        <Compile Include="CustomDataExample.fs" />
+        <Compile Include="FirstTest.fs" />
+        <Compile Include="NaturalAttributeTest.fs" />
+        <Compile Include="MemberDataTest.fs" />
+        <Compile Include="ParameterizedxUnitTest.fs" />
+        <Compile Include="ClassDataBaseTest.fs" />
+        <Compile Include="SingleDataSourceTest.fs" />
+        <Compile Include="TupleDataSourceTest.fs" />
+        <Compile Include="ArrayDataSourceTest.fs" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="ReflectionTest.fs" />
-    <Compile Include="CustomDataExample.fs" />
-    <Compile Include="Tests.fs" />
-    <Compile Include="NaturalAttributeTest.fs" />
-    <Compile Include="MemberDataTest.fs" />
-    <Compile Include="ParameterizedxUnitTest.fs" />
-    <Compile Include="ClassDataBaseTest.fs" />
-    <Compile Include="SingleDataSourceTest.fs" />
-    <Compile Include="TupleDataSourceTest.fs" />
-    <Compile Include="ArrayDataSourceTest.fs" />
-    <Compile Include="Program.fs" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FSharp.Idioms" Version="1.5.5" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="8.0.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="xunit.v3.assert" Version="3.2.2" />
+        <PackageReference Include="xunit.v3.core.mtp-v2" Version="3.2.2" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FSharp.Idioms" Version="1.5.5" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="6.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\FSharp.xUnit\FSharp.xUnit.fsproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FSharp.xUnit\FSharp.xUnit.fsproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="10.0.102" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Update="FSharp.Core" Version="10.1.201" />
+    </ItemGroup>
 
 </Project>

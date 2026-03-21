@@ -8,8 +8,7 @@ open Xunit
 
 open FSharp.Idioms.Literal
 
-
-type Test(output:ITestOutputHelper) =
+type FirstTest(output:ITestOutputHelper) =
     [<Theory>]
     [<InlineData()>] // **note**
     [<InlineData(1)>]
