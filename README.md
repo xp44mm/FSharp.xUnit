@@ -6,6 +6,8 @@ The class library extends `xunit` to assert equal.
 
 ## GetStarted 
 
+### equal notEqual
+
 使用系统默认的相等比较器：
 
 ```F#
@@ -16,7 +18,7 @@ let ``My test`` () =
     Should.equal 1 1
 ```
 
-相反的操作`Should.notEqual`
+相反的操作`Should.notEqual`。
 
 使用自定义的相等比较器：
 
@@ -28,7 +30,7 @@ let ``My test`` () =
 
 相反的操作`should.notEqual`
 
-## NaturalAttribute
+### NaturalAttribute
 
 Natural number sequence Theory is the simplest form of testing our theory with data.
 
