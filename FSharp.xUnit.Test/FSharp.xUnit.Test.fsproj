@@ -21,7 +21,7 @@
 
     <ItemGroup>
         <PackageReference Update="FSharp.Core" Version="10.1.400" />
-        <PackageReference Include="FSharp.Idioms" Version="1.5.16" />
+        <PackageReference Include="FSharp.Idioms" Version="1.5.17" />
         <PackageReference Include="xunit.v3.assert" Version="4.0.0" />
         <PackageReference Include="xunit.v3.core.mtp-v2" Version="4.0.0" />
     </ItemGroup>

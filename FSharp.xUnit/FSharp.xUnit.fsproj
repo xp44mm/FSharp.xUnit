@@ -13,8 +13,8 @@
         <Copyright>xp44mm</Copyright>
         <RepositoryUrl>https://github.com/xp44mm/FSharp.xUnit</RepositoryUrl>
         <PackageProjectUrl>https://github.com/xp44mm/FSharp.xUnit</PackageProjectUrl>
-        <Version>1.4.0</Version>
-        <PackageReleaseNotes>Upgrade to xunit.v3 4.0.0, FSharp.Core 10.1.400, FSharp.Idioms 1.5.16.</PackageReleaseNotes>
+        <Version>1.4.1</Version>
+        <PackageReleaseNotes>Upgrade packages</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Title>FSharp.xUnit</Title>
     </PropertyGroup>
@@ -38,7 +38,7 @@
 
     <ItemGroup>
         <PackageReference Update="FSharp.Core" Version="10.1.400" />
-        <PackageReference Include="FSharp.Idioms" Version="1.5.16" />
+        <PackageReference Include="FSharp.Idioms" Version="1.5.17" />
         <PackageReference Include="xunit.v3.assert" Version="4.0.0" />
         <PackageReference Include="xunit.v3.extensibility.core" Version="4.0.0" />
     </ItemGroup>
